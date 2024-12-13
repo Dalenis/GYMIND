@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="site.title">一带一路国家产学研转化中心</title>
+    <!-- 引入 Bootstrap 和 AOS 的 CSS 文件 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <style>
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            color: white;
+            overflow: hidden;
+        }
+        
+        .hero-slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        
+        .hero-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-slide.active {
+            opacity: 1;
+        }
+        
+        .position-relative {
+            z-index: 1;
+        }
+        
+        .section-padding {
+            padding: 80px 0;
+        }
+        
+        .card {
+            transition: transform 0.3s;
+            margin-bottom: 20px;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+        
+        .timeline-item {
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 3px solid #0d6efd;
+            position: relative;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 25px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #0d6efd;
+        }
+        
+        .navbar {
+            transition: background-color 0.3s;
+        }
+        
+        .navbar.scrolled {
+            background-color: #fff !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        /* 语言切换器样式 */
+        .language-switcher {
+            margin-left: 20px;
+        }
+        
+        .language-switcher button {
+            color: white;
+            padding: 5px 10px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            background: none;
+            border: none;
+        }
+        
+        .language-switcher button:hover {
+            color: #86b7fe;
+        }
+        
+        /* RTL支持 */
+        [dir="rtl"] .navbar-nav {
+            padding-right: 0;
+        }
+        
+        [dir="rtl"] .language-switcher {
+            margin-right: 20px;
+            margin-left: 0;
+        }
+
+        /* 调整滚动偏移，避免被固定导航栏遮挡 */
+        section {
+            scroll-margin-top: 80px; /* 根据导航栏高度进行调整 */
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="./images/logo.png" alt="Logo" height="40">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#home" data-i18n="nav.home">首页</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#info-row" data-i18n="nav.about">关于我们</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#info-row" data-i18n="nav.projects">项目介绍</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#info-row" data-i18n="nav.partners">合作伙伴</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#info-row" data-i18n="nav.contact">联系我们</a>
+                    </li>
+                </ul>
+                <div class="language-switcher">
+                    <button class="btn btn-link" data-lang="zh">中文</button>
+                    <button class="btn btn-link" data-lang="en">English</button>
+                    <button class="btn btn-link" data-lang="ru">Русский</button>
+                    <button class="btn btn-link" data-lang="ar">العربية</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 首页英雄区 -->
+    <section id="home" class="hero-section">
+        <div class="hero-slider">
+            <div class="hero-slide active" style="background-image: url('./images/hero-1.jpg')"></div>
+            <div class="hero-slide" style="background-image: url('./images/hero-2.jpg')"></div>
+            <div class="hero-slide" style="background-image: url('./images/hero-3.jpg')"></div>
+        </div>
+        <div class="container text-center position-relative">
+            <h1 class="display-3 mb-4" data-i18n="hero.title">一带一路国家产学研转化中心</h1>
+            <p class="lead mb-4" data-i18n="hero.subtitle">创新科技，促进合作，连接未来</p>
+            <a href="#about" class="btn btn-light btn-lg" data-i18n="hero.cta">了解更多</a>
+        </div>
+    </section>
+
+    <!-- 信息区域 -->
+    <section id="info-row" class="section-padding bg-light">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-4" data-aos="fade-up">
+                    <h2 class="mb-3" data-i18n="about.title">关于我们</h2>
+                    <p data-i18n="about.content">我们的使命是促进一带一路国家间的科技创新合作，推动产学研深度融合。</p>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <h2 class="mb-3" data-i18n="projects.title">项目介绍</h2>
+                    <p data-i18n="projects.content">我们致力于技术转化、人才培养和国际合作。</p>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <h2 class="mb-3" data-i18n="partners.title">合作伙伴</h2>
+                    <p data-i18n="partners.content">我们的合作伙伴包括高校、企业、政府和国际组织。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于我们 -->
+    <section id="about" class="section-padding">
+        <div class="container">
+            <h2 class="text-center mb-5" data-i18n="about.title">关于我们</h2>
+            <p data-i18n="about.content">我们的使命是促进一带一路国家的科技创新合作，推动产学研深度融合。</p>
+        </div>
+    </section>
+
+    <!-- 项目介绍 -->
+    <section id="projects" class="section-padding bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5" data-i18n="projects.title">项目介绍</h2>
+            <p data-i18n="projects.content">我们致力于技术转化、人才培养和国际合作。</p>
+        </div>
+    </section>
+
+    <!-- 合作伙伴 -->
+    <section id="partners" class="section-padding">
+        <div class="container">
+            <h2 class="text-center mb-5" data-i18n="partners.title">合作伙伴</h2>
+            <p data-i18n="partners.content">我们的合作伙伴包括高校、企业、政府和国际组织。</p>
+        </div>
+    </section>
+
+    <!-- 联系我们 -->
+    <section id="contact" class="section-padding bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5" data-i18n="contact.title">联系我们</h2>
+            <form>
+                <div class="mb-3">
+                    <label for="name" class="form-label" data-i18n="contact.form.name">姓名</label>
+                    <input type="text" class="form-control" id="name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label" data-i18n="contact.form.email">邮箱</label>
+                    <input type="email" class="form-control" id="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label" data-i18n="contact.form.message">留言</label>
+                    <textarea class="form-control" id="message" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" data-i18n="contact.form.submit">提交</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <p>© 2024 金乌思路科技有限公司. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- 引入 Bootstrap 和 AOS 的 JS 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化 AOS
+            AOS.init({
+                duration: 1000,
+                once: true
+            });
+
+            // 初始化语言切换器
+            initLanguageSwitcher();
+            
+            // 设置默认语言
+            const savedLang = localStorage.getItem('preferred-language') || 'zh';
+            switchLanguage(savedLang);
+
+            // 初始化背景图轮播
+            initHeroSlider();
+
+            // 平滑滚动到目标部分
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const navHeight = document.querySelector('.navbar').offsetHeight;
+                        const targetPosition = targetElement.offsetTop - navHeight;
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+
+        // 翻译对
+        const translations = {
+            zh: {
+                'site.title': '一带一路国家产学研转化中心',
+                'nav.home': '首页',
+                'nav.about': '关于我们',
+                'nav.projects': '项目介绍',
+                'nav.partners': '合作伙伴',
+                'nav.contact': '联系我们',
+                'hero.title': '一带一路国家产学研转化中心',
+                'hero.subtitle': '创新科技，促进合作，连接未来',
+                'hero.cta': '了解更多',
+                'about.title': '关于我们',
+                'about.content': '我们的使命是促进一带一路国家的科技创新合作，推动产学研深度融合。',
+                'projects.title': '项目介绍',
+                'projects.content': '我们致力于技术转化、人才培养和国际合作。',
+                'partners.title': '合作伙伴',
+                'partners.content': '我们的合作伙伴包括高校、企业、政府和国际组织。',
+                'contact.title': '联系我们',
+                'contact.form.name': '姓名',
+                'contact.form.email': '邮箱',
+                'contact.form.message': '留言',
+                'contact.form.submit': '提交'
+            },
+            en: {
+                'site.title': 'Belt and Road Industry-University-Research Transformation Center',
+                'nav.home': 'Home',
+                'nav.about': 'About Us',
+                'nav.projects': 'Projects',
+                'nav.partners': 'Partners',
+                'nav.contact': 'Contact',
+                'hero.title': 'Belt and Road Industry-University-Research Transformation Center',
+                'hero.subtitle': 'Innovative Technology, Promoting Cooperation, Connecting Future',
+                'hero.cta': 'Learn More',
+                'about.title': 'About Us',
+                'about.content': 'Our mission is to promote scientific and technological innovation cooperation among Belt and Road countries, and to promote deep integration of industry, university, and research.',
+                'projects.title': 'Projects',
+                'projects.content': 'We are committed to technology transfer, talent cultivation, and international cooperation.',
+                'partners.title': 'Partners',
+                'partners.content': 'Our partners include universities, enterprises, governments, and international organizations.',
+                'contact.title': 'Contact Us',
+                'contact.form.name': 'Name',
+                'contact.form.email': 'Email',
+                'contact.form.message': 'Message',
+                'contact.form.submit': 'Submit'
+            },
+            ru: {
+                'site.title': 'Центр трансформации промышленности, науки и исследований "Один пояс, один путь"',
+                'nav.home': 'Главная',
+                'nav.about': 'О нас',
+                'nav.projects': 'Проекты',
+                'nav.partners': 'Партнеры',
+                'nav.contact': 'Контакты',
+                'hero.title': 'Центр трансформации промышленности, науки и исследований "Один пояс, один путь"',
+                'hero.subtitle': 'Инновационные технологии, содействие сотрудничеству, соединение будущего',
+                'hero.cta': 'Узнать больше',
+                'about.title': 'О нас',
+                'about.content': 'Наша миссия - содействовать научно-техническому инновационному сотрудничеству между странами "Один пояс, один путь" и способствовать глубокой интеграции промышленности, университетов и исследований.',
+                'projects.title': 'Проекты',
+                'projects.content': 'Мы стремимся к передаче технологий, подготовке кадров и международному сотрудничеству.',
+                'partners.title': 'Партнеры',
+                'partners.content': 'Наши партнеры включают университеты, предприятия, правительства и международные организации.',
+                'contact.title': 'Контакты',
+                'contact.form.name': 'Имя',
+                'contact.form.email': 'Эл. почта',
+                'contact.form.message': 'Сообщение',
+                'contact.form.submit': 'Отправить'
+            },
+            ar: {
+                'site.title': 'مركز تحويل الصناعة والجامعة والبحوث لمبادرة الحزام والطريق',
+                'nav.home': 'الرئيسية',
+                'nav.about': 'عن المركز',
+                'nav.projects': 'المشاريع',
+                'nav.partners': 'الشركاء',
+                'nav.contact': 'اتصل بنا',
+                'hero.title': 'مركز تحويل الصناعة والجامعة والبحوث لمبادرة الحزام والطريق',
+                'hero.subtitle': 'التكنولوجيا المبتكرة، تعزيز التعاون، ربط المستقبل',
+                'hero.cta': 'اكتشف المزيد',
+                'about.title': 'عن المركز',
+                'about.content': 'مهمتنا هي تعزيز التعاون في مجال الابتكار العلمي والتكنولوجي بين دول الحزام والطريق، وتعزيز التكامل العميق بين الصناعة والجامعة والبحث.',
+                'projects.title': 'المشاريع',
+                'projects.content': 'نحن ملتزمون بنقل التكنولوجيا، وتطوير المواهب، والتعاون الدولي.',
+                'partners.title': 'الشركاء',
+                'partners.content': 'شركاؤنا يشملون الجامعات، والشركات، والحكومات، والمنظمات الدولية.',
+                'contact.title': 'اتصل بنا',
+                'contact.form.name': 'الاسم',
+                'contact.form.email': 'البريد الإلكتروني',
+                'contact.form.message': 'الرسالة',
+                'contact.form.submit': 'إرسال'
+            }
+        };
+
+        // 语言切换器初始化
+        function initLanguageSwitcher() {
+            const buttons = document.querySelectorAll('.language-switcher button');
+            buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const lang = button.getAttribute('data-lang');
+                    switchLanguage(lang);
+                });
+            });
+        }
+
+        // 语言切换函数
+        function switchLanguage(lang) {
+            console.log(`Switching to language: ${lang}`); // 调试日志
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                    console.log(`Updated ${key} to: ${translations[lang][key]}`); // 调试日志
+                } else {
+                    console.warn(`Missing translation for key: ${key} in language: ${lang}`); // 调试日志
+                }
+            });
+            
+            // 更新文档方向（针对阿拉伯语）
+            document.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+            // 保存语言选择
+            localStorage.setItem('preferred-language', lang);
+        }
+
+        // 初始化英雄背景轮播
+        function initHeroSlider() {
+            const slides = document.querySelectorAll('.hero-slide');
+            let currentSlide = 0;
+
+            function showSlide(index) {
+                slides.forEach((slide, idx) => {
+                    slide.classList.toggle('active', idx === index);
+                });
+            }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+            }
+
+            // 设置轮播时间间隔（例如，5秒）
+            setInterval(nextSlide, 5000);
+        }
+    </script>
+</body>
+</html>
